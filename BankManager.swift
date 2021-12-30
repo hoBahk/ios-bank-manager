@@ -20,7 +20,7 @@ struct BankManager {
             case .startBusiness:
                 let randomNumber = Int.random(in: 10...30)
                 Bank(
-                    numberOfClients: randomNumber,
+                    numberOfClients: 10,
                     numberOfDepositBankTellers: 2,
                     numberOfLoanBankTellers: 1
                 ).startBankingService()

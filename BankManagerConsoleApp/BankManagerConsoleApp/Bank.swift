@@ -25,12 +25,15 @@ class Bank {
     }
     
     private let clients = Queue<Client>()
-    private let numberOfClients: Int
+    private var numberOfClients: Int = 0
     private let depositSemaphore: DispatchSemaphore
     private let loanSemaphore: DispatchSemaphore
     
+    let depositDispatchQueue = DispatchQueue(label: Service.deposit.rawValue)
+    let loanDispatchQueue = DispatchQueue(label: Service.loan.rawValue)
+    let group = DispatchGroup()
+    
     init(numberOfClients: Int, numberOfDepositBankTellers: Int, numberOfLoanBankTellers: Int) {
-        self.numberOfClients = numberOfClients
         self.depositSemaphore = DispatchSemaphore(value: numberOfDepositBankTellers)
         self.loanSemaphore = DispatchSemaphore(value: numberOfLoanBankTellers)
         addClientsToQueue(by: numberOfClients)
@@ -38,16 +41,16 @@ class Bank {
     
     func startBankingService() {
         let startTime = Date()
-        
-        let depositDispatchQueue = DispatchQueue(label: Service.deposit.rawValue)
-        let loanDispatchQueue = DispatchQueue(label: Service.loan.rawValue)
-        let group = DispatchGroup()
-        
+
+        processAllServices()
+        group.notify(queue: DispatchQueue.global()) {
+            let elapsedTime = String(format: "%.2f", Date().timeIntervalSince(startTime))
+            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients)명이며, 총 업무시간은 \(elapsedTime)초입니다.")
+        }
+        addClientsToQueue(by: 10)
         processAllServices()
         
-        group.wait()
-        let elapsedTime = String(format: "%.2f", Date().timeIntervalSince(startTime))
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients)명이며, 총 업무시간은 \(elapsedTime)초입니다.")
+        
     }
     
     private func processAllServices() {
@@ -56,12 +59,12 @@ class Bank {
             case .deposit:
                 depositDispatchQueue.async(group: group) {
                     self.depositSemaphore.wait()
-                    self.processDepositService(to: client, group: group)
+                    self.processDepositService(to: client, group: self.group)
                 }
             case .loan:
                 loanDispatchQueue.async(group: group) {
                     self.loanSemaphore.wait()
-                    self.processLoanService(to: client, group: group)
+                    self.processLoanService(to: client, group: self.group)
                 }
             }
         }
@@ -69,9 +72,12 @@ class Bank {
     
     private func addClientsToQueue(by numberOfClients: Int) {
         (1...numberOfClients).forEach {
-            let client = Client(waitingNumber: $0)
+            let client = Client(waitingNumber: self.numberOfClients + $0)
             clients.enqueue(client)
+//            delegate.addLabel()
+//            group
         }
+        self.numberOfClients += numberOfClients
     }
 
     private func processDepositService(to client: Client, group: DispatchGroup) {

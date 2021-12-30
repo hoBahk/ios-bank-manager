@@ -12,5 +12,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view = BankManagerView()
+        let timer = Timer(timeInterval: 1.0, repeats: true) {
+            print("\($0) test")
+//            bank.currentTime += 1.0
+        }
+        RunLoop.current.add(timer, forMode: .common)
+        
+        timer.invalidate()
+        print("resume")
+        let timer2 = Timer(timeInterval: 1.0, repeats: true) {
+            print("\($0) test")
+//            bank.currentTime += 1.0
+        }
+        RunLoop.current.add(timer2, forMode: .common)
     }
 }
