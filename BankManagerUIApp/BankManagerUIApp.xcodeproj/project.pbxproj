@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2552CE88277C5A9100EAF827 /* ClientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2552CE87277C5A9100EAF827 /* ClientLabel.swift */; };
+		3A61C476277D914B002EE3FB /* pseudoCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61C475277D914B002EE3FB /* pseudoCode.swift */; };
 		3A817153277C4A3900FBD9C8 /* BankManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817152277C4A3900FBD9C8 /* BankManagerView.swift */; };
 		605A7262277C3AF600134F99 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A725F277C3AF600134F99 /* Bank.swift */; };
 		605A7263277C3AF600134F99 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A7260277C3AF600134F99 /* Client.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		2552CE87277C5A9100EAF827 /* ClientLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLabel.swift; sourceTree = "<group>"; };
+		3A61C475277D914B002EE3FB /* pseudoCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pseudoCode.swift; sourceTree = "<group>"; };
 		3A817152277C4A3900FBD9C8 /* BankManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BankManagerView.swift; path = View/BankManagerView.swift; sourceTree = "<group>"; };
 		605A725F277C3AF600134F99 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Bank.swift; sourceTree = "<group>"; };
 		605A7260277C3AF600134F99 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Client.swift; path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Client.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
+				3A61C475277D914B002EE3FB /* pseudoCode.swift */,
 				C7694E39259C3E9F0053667F /* BankManagerUIApp */,
 				C7694E50259C3EA20053667F /* BankManagerUIAppTests */,
 				C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */,
@@ -290,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				3A61C476277D914B002EE3FB /* pseudoCode.swift in Sources */,
 				605A7264277C3AF600134F99 /* Queue.swift in Sources */,
 				3A817153277C4A3900FBD9C8 /* BankManagerView.swift in Sources */,
 				605A7262277C3AF600134F99 /* Bank.swift in Sources */,

@@ -38,16 +38,19 @@ class Bank {
     
     func startBankingService() {
         let startTime = Date()
+        
+        let depositDispatchQueue = DispatchQueue(label: Service.deposit.rawValue)
+        let loanDispatchQueue = DispatchQueue(label: Service.loan.rawValue)
+        let group = DispatchGroup()
+        
         processAllServices()
+        
+        group.wait()
         let elapsedTime = String(format: "%.2f", Date().timeIntervalSince(startTime))
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients)명이며, 총 업무시간은 \(elapsedTime)초입니다.")
     }
     
     private func processAllServices() {
-        let depositDispatchQueue = DispatchQueue(label: Service.deposit.rawValue)
-        let loanDispatchQueue = DispatchQueue(label: Service.loan.rawValue)
-        let group = DispatchGroup()
-        
         while let client = clients.dequeue() {
             switch client.business {
             case .deposit:
@@ -62,7 +65,6 @@ class Bank {
                 }
             }
         }
-        group.wait()
     }
     
     private func addClientsToQueue(by numberOfClients: Int) {
